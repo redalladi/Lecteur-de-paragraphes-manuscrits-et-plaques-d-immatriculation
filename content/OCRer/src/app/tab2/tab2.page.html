@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Which one should I read?
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">ocr</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+    <ion-col size="6" *ngFor="let photo of photoService.photos; index as position">
+      <ion-img [src]="photo.webviewPath" (click)="showActionSheet(photo, position)"></ion-img>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" >
+    <ion-fab-button color="dark" (click)="photoService.addNewToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+    <ion-fab-button color="dark" (click)="this.showPrompt()">
+      <ion-icon name="settings"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button expand="full" color="dark">
+      <label for="file-input" style="font-size: 20pt; padding: 30px">
+        +       
+      </label>
+      <ion-icon lazy="true" slot="start" name="add-circle-outline"></ion-icon>
+      <input type="file" (change)="photoService.loadImageFromDevice($event)" id="file-input" class="hideInput"
+        accept="image/png, image/jpeg" value="+" style="opacity: 0; font-size: 50pt; ">
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
